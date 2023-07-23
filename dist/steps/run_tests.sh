@@ -172,7 +172,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
   TEST_EXIT_CODE=$?
 
   # Print unity log output
-  cat "$FULL_ARTIFACTS_PATH/$platform.log"
+  tail -f "$FULL_ARTIFACTS_PATH/$platform.log"
 
   if [[ $TEST_EXIT_CODE -eq 0 && "$platform" == "standalone" ]]; then
     echo ""
