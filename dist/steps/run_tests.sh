@@ -165,11 +165,7 @@ for platform in ${TEST_PLATFORMS//;/ }; do
     -batchmode \
     -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
     -projectPath "$UNITY_PROJECT_PATH" \
-    -coverageResultsPath "$FULL_COVERAGE_RESULTS_PATH" \
     $runTests \
-    -enableCodeCoverage \
-    -debugCodeOptimization \
-    -coverageOptions "$COVERAGE_OPTIONS" \
     $CUSTOM_PARAMETERS
 
   # Catch exit code
