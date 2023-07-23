@@ -163,16 +163,13 @@ for platform in ${TEST_PLATFORMS//;/ }; do
 
   unity-editor \
     -batchmode \
-    -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
+    -logFile - \
     -projectPath "$UNITY_PROJECT_PATH" \
     $runTests \
     $CUSTOM_PARAMETERS
 
   # Catch exit code
   TEST_EXIT_CODE=$?
-
-  # Print unity log output
-  tail -f "$FULL_ARTIFACTS_PATH/$platform.log"
 
   if [[ $TEST_EXIT_CODE -eq 0 && "$platform" == "standalone" ]]; then
     echo ""
