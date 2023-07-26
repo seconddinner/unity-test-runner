@@ -933,6 +933,10 @@ const ResultsCheck = {
             // Format output
             const title = runSummary.summary;
             const summary = yield ResultsCheck.renderSummary(runs);
+            var summaryOutput = summary;
+            // Replace the line break with ;
+            summaryOutput = summaryOutput.replace(/\n/g, ';');
+            core.setOutput("testSummary", summaryOutput);
             core.debug(`Summary view: ${summary}`);
             const details = yield ResultsCheck.renderDetails(runs);
             core.debug(`Details view: ${details}`);
@@ -960,9 +964,9 @@ const ResultsCheck = {
             const pullRequest = github.context.payload.pull_request;
             const headSha = (pullRequest && pullRequest.head.sha) || github.context.sha;
             const maxLength = 65534;
-            if (output.length > maxLength) {
-                core.warning(`Output too long (${output.length}) truncating to ${maxLength}`);
-                output = output.slice(0, maxLength);
+            if (output.text.length > maxLength) {
+                core.warning(`Output text too long (${output.text.length}) truncating to ${maxLength}`);
+                output.text = output.text.slice(0, maxLength);
             }
             core.info(`Posting results for ${headSha}`);
             const createCheckRequest = Object.assign(Object.assign({}, github.context.repo), { name: checkName, head_sha: headSha, status: 'completed', conclusion: 'neutral', output });
