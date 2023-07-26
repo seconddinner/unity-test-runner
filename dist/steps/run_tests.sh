@@ -163,20 +163,13 @@ for platform in ${TEST_PLATFORMS//;/ }; do
 
   unity-editor \
     -batchmode \
-    -logFile "$FULL_ARTIFACTS_PATH/$platform.log" \
+    -logFile - \
     -projectPath "$UNITY_PROJECT_PATH" \
-    -coverageResultsPath "$FULL_COVERAGE_RESULTS_PATH" \
     $runTests \
-    -enableCodeCoverage \
-    -debugCodeOptimization \
-    -coverageOptions "$COVERAGE_OPTIONS" \
     $CUSTOM_PARAMETERS
 
   # Catch exit code
   TEST_EXIT_CODE=$?
-
-  # Print unity log output
-  cat "$FULL_ARTIFACTS_PATH/$platform.log"
 
   if [[ $TEST_EXIT_CODE -eq 0 && "$platform" == "standalone" ]]; then
     echo ""

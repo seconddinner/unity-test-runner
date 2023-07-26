@@ -14,6 +14,10 @@ Part of the <a href="https://game.ci">GameCI</a> open source project.
 <br />
 <br />
 
+## Why did we fork this repo?
+1. Disable code coverage for better performance
+2. Stream Unity logs to GitHub Actions output so that we don't need to wait until the tests are finished.
+
 ## How to use
 
 Find the
