@@ -965,7 +965,7 @@ const ResultsCheck = {
                 output = output.slice(0, maxLength);
             }
             core.info(`Posting results for ${headSha}`);
-            const createCheckRequest = Object.assign(Object.assign({}, github.context.repo), { name: checkName, head_sha: headSha, status: 'completed', conclusion: 'neutral', output });
+            const createCheckRequest = Object.assign(Object.assign({}, github.context.repo), { name: checkName, head_sha: headSha, external_id: github.run_number, status: 'completed', conclusion: 'neutral', output });
             const octokit = github.getOctokit(githubToken);
             yield octokit.rest.checks.create(createCheckRequest);
         });
