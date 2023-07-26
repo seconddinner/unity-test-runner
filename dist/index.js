@@ -933,7 +933,10 @@ const ResultsCheck = {
             // Format output
             const title = runSummary.summary;
             const summary = yield ResultsCheck.renderSummary(runs);
-            core.setOutput("testSummary", summary);
+            var summaryOutput = summary;
+            // Replace the line break with \n
+            summaryOutput = summaryOutput.replace(/<br>/g, '\n');
+            core.setOutput("testSummary", summaryOutput);
             core.debug(`Summary view: ${summary}`);
             const details = yield ResultsCheck.renderDetails(runs);
             core.debug(`Details view: ${details}`);
