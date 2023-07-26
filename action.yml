@@ -65,6 +65,8 @@ outputs:
     description: 'Path where the artifacts are stored.'
   coveragePath:
     description: 'Path where the code coverage results are stored.'
+  testSummary:
+    description: 'Summary of the test results.'
 branding:
   icon: 'box'
   color: 'gray-dark'

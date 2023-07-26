@@ -933,6 +933,7 @@ const ResultsCheck = {
             // Format output
             const title = runSummary.summary;
             const summary = yield ResultsCheck.renderSummary(runs);
+            core.setOutput("testSummary", summary);
             core.debug(`Summary view: ${summary}`);
             const details = yield ResultsCheck.renderDetails(runs);
             core.debug(`Details view: ${details}`);
@@ -965,7 +966,7 @@ const ResultsCheck = {
                 output.text = output.text.slice(0, maxLength);
             }
             core.info(`Posting results for ${headSha}`);
-            const createCheckRequest = Object.assign(Object.assign({}, github.context.repo), { name: checkName, head_sha: headSha, external_id: github.run_id, status: 'completed', conclusion: 'neutral', output });
+            const createCheckRequest = Object.assign(Object.assign({}, github.context.repo), { name: checkName, head_sha: headSha, status: 'completed', conclusion: 'neutral', output });
             const octokit = github.getOctokit(githubToken);
             yield octokit.rest.checks.create(createCheckRequest);
         });
